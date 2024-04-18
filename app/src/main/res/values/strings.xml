@@ -5,4 +5,9 @@
     <string name="title_short">Короче</string>
     <string name="title_subscriptions">Подписки</string>
     <string name="title_profile">Профиль</string>
+    <string name="air_tickets_top_text">Поиск дешевых\nавиабилетов</string>
+    <string name="hint_from">Откуда - Москва</string>
+    <string name="hint_where">Куда - Турция</string>
+    <string name="air_tickets_senter_title">Музыкально отлететь</string>
+    <string name="price_pattern">от %1$s₽</string>
 </resources>

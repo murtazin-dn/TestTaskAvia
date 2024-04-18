@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -39,6 +40,23 @@ android {
 }
 
 dependencies {
+
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
+    val dagger_version = "2.51.1"
+
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
+    //Dagger
+    implementation("com.google.dagger:dagger:$dagger_version")
+    implementation("com.google.dagger:dagger-android:$dagger_version")
+    implementation("com.google.dagger:dagger-android-support:$dagger_version")
+    kapt("com.google.dagger:dagger-compiler:$dagger_version")
+    implementation("javax.inject:javax.inject:1")
+
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
