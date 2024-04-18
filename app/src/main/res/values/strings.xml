@@ -10,4 +10,12 @@
     <string name="hint_where">Куда - Турция</string>
     <string name="air_tickets_senter_title">Музыкально отлететь</string>
     <string name="price_pattern">от %1$s₽</string>
+    <string name="title_search1">Сложный маршрут</string>
+    <string name="title_search2">Куда угодно</string>
+    <string name="title_search3">Выходные</string>
+    <string name="title_search4">Горячие билеты</string>
+    <string name="title_stambul">Стамбул</string>
+    <string name="title_sochi">Сочи</string>
+    <string name="title_phuket">Пхукет</string>
+    <string name="title_popular_destination">Популярное направление</string>
 </resources>
