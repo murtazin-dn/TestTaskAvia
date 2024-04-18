@@ -88,6 +88,7 @@
 
 
                     <EditText
+                        android:id="@id/et_where"
                         style="@style/Base.Widget.AppCompat.EditText.CustomEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

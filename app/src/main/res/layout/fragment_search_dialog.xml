@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/grey2"
     android:orientation="vertical">
-    <!--    tools:listitem="@layout/fragment_search_dialog_item"-->
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -33,13 +33,14 @@
                     app:srcCompat="@drawable/ic_plane"
                     tools:srcCompat="@drawable/ic_plane" />
 
-                <EditText
+                <TextView
                     android:id="@+id/et_from"
-                    style="@style/Base.Widget.AppCompat.EditText.CustomEditText"
+                    style="@style/TextAppearance.AppCompat.BaseText.ButtonText1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/hint_from" />
+                    android:layout_marginTop="8dp"
+                    android:text="@string/hint_from" />
 
             </LinearLayout>
 
@@ -69,11 +70,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/hint_where" />
+                    android:hint="@string/hint_where"/>
 
 
                 <ImageView
-                    android:id="@+id/ic_clear"
+                    android:id="@+id/btn_clear"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="8dp"
@@ -95,7 +96,6 @@
         android:layout_marginEnd="8dp">
 
         <LinearLayout
-            android:id="@+id/btn_search1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -105,6 +105,7 @@
             android:layout_marginEnd="8dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_search1"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 app:cardBackgroundColor="@color/green"
@@ -132,7 +133,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btn_search2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -142,6 +142,7 @@
             android:layout_marginEnd="8dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_search2"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 app:cardBackgroundColor="@color/blue"
@@ -169,7 +170,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btn_search3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -179,6 +179,7 @@
             android:layout_marginEnd="8dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_search3"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 app:cardBackgroundColor="@color/dark_blue"
@@ -206,7 +207,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btn_search4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -216,6 +216,7 @@
             android:layout_marginEnd="8dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_search4"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 app:cardBackgroundColor="@color/red"

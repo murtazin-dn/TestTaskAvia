@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/navigation_air_tickets">
+    <fragment
+        android:id="@+id/navigation_air_tickets"
+        android:name="com.example.testtaskavia.presentation.ui.AirTicketsFragment"
+        tools:layout="@layout/fragment_air_tickets"
+        android:label="@string/title_air_tickets">
+        <action
+            android:id="@+id/action_navigation_air_tickets_to_searchDialogFragment"
+            app:destination="@id/searchDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/searchDialogFragment"
+        android:name="com.example.testtaskavia.presentation.ui.SearchDialogFragment"
+        android:label="SearchDialogFragment">
+        <action
+            android:id="@+id/action_searchDialogFragment_to_searchFragment1"
+            app:destination="@id/searchFragment1" />
+        <action
+            android:id="@+id/action_searchDialogFragment_to_searchFragment2"
+            app:destination="@id/searchFragment2" />
+        <action
+            android:id="@+id/action_searchDialogFragment_to_searchFragment3"
+            app:destination="@id/searchFragment3" />
+        <action
+            android:id="@+id/action_searchDialogFragment_to_searchFragment4"
+            app:destination="@id/searchFragment4" />
+    </dialog>
+    <fragment
+        android:id="@+id/searchFragment4"
+        android:name="com.example.testtaskavia.presentation.ui.SearchFragment4"
+        tools:layout="@layout/fragment_search4"
+        android:label="fragment_search4" />
+    <fragment
+        android:id="@+id/searchFragment3"
+        android:name="com.example.testtaskavia.presentation.ui.SearchFragment3"
+        tools:layout="@layout/fragment_search3"
+        android:label="fragment_search3" />
+    <fragment
+        android:id="@+id/searchFragment2"
+        android:name="com.example.testtaskavia.presentation.ui.SearchFragment2"
+        tools:layout="@layout/fragment_search2"
+        android:label="fragment_search2" />
+    <fragment
+        android:id="@+id/searchFragment1"
+        android:name="com.example.testtaskavia.presentation.ui.SearchFragment1"
+        tools:layout="@layout/fragment_search1"
+        android:label="fragment_search1" />
+</navigation>
