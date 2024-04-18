@@ -9,6 +9,7 @@ import com.example.domain.model.Offer
 import com.example.testtaskavia.R
 import com.example.testtaskavia.databinding.FragmentAirTicketsBinding
 import com.example.testtaskavia.databinding.OfferCardBinding
+import com.example.testtaskavia.presentation.utils.ext.formatIntWithSpaces
 
 class OffersAdapter: RecyclerView.Adapter<OffersAdapter.OffersViewHolder>() {
 
@@ -40,7 +41,7 @@ class OffersAdapter: RecyclerView.Adapter<OffersAdapter.OffersViewHolder>() {
         with(holder.binding){
             tvName.text = offer.title
             tvCity.text = offer.town
-            tvPrice.text = context.getString(R.string.price_pattern, offer.price)
+            tvPrice.text = context.getString(R.string.price_pattern, offer.price.formatIntWithSpaces())
 
             Glide
                 .with(context)

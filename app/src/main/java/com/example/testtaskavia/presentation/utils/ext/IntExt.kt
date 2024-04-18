@@ -1,7 +1,7 @@
-package com.example.data.network.utils
+package com.example.testtaskavia.presentation.utils.ext
 
-fun formatNumberWithSpaces(number: Int): String {
-    val numberString = number.toString()
+fun Int.formatIntWithSpaces(): String {
+    val numberString = this.toString()
     val reversed = numberString.reversed()
     val stringBuilder = StringBuilder()
 

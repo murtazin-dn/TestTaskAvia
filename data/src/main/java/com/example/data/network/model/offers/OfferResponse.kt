@@ -1,6 +1,8 @@
 package com.example.data.network.model.offers
 
-data class Offer(
+import com.example.data.network.model.Price
+
+data class OfferResponse(
     val id: Int,
     val price: Price,
     val title: String,
