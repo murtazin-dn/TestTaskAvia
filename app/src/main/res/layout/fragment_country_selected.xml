@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/grey3"
+        app:cardCornerRadius="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_left_arrow"
+                tools:srcCompat="@drawable/ic_left_arrow" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_from"
+                        style="@style/Base.Widget.AppCompat.EditText.CustomEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_from" />
+
+                    <ImageView
+                        android:id="@+id/btn_change"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="8dp"
+                        app:srcCompat="@drawable/ic_change"
+                        tools:srcCompat="@drawable/ic_change" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@id/et_where"
+                        style="@style/Base.Widget.AppCompat.EditText.CustomEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_where" />
+
+                    <ImageView
+                        android:id="@+id/btn_clear"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="8dp"
+                        app:srcCompat="@drawable/ic_close"
+                        tools:srcCompat="@drawable/ic_close" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_back"
+                style="@style/Widget.MaterialComponents.Chip.Action.CustomChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_back"
+                app:chipIcon="@drawable/ic_plus"
+                app:iconStartPadding="4dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_date"
+                style="@style/Widget.MaterialComponents.Chip.Action.CustomChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Action.CustomChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,эконом"
+                app:chipIcon="@drawable/ic_person"
+                app:iconStartPadding="4dp" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Action.CustomChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_filter"
+                app:chipIcon="@drawable/ic_filter"
+                app:iconStartPadding="4dp" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/grey1"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.BaseText.Title2"
+                android:text="@string/title_straight_rails"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+<!--            <FrameLayout-->
+<!--                android:id="@+id/btn_show_all"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="42dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginBottom="4dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    style="@style/TextAppearance.AppCompat.BaseText.ButtonText1"-->
+<!--                    android:text="@string/title_show_all"-->
+<!--                    android:textColor="@color/blue"-->
+<!--                    android:layout_gravity="center"/>-->
+
+<!--            </FrameLayout>-->
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_background"
+        android:text="@string/title_show_all_tickets"
+        android:textAllCaps="false"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textSize="16sp"/>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
+    android:id="@+id/navigation_air_tickets_flow"
     app:startDestination="@id/navigation_air_tickets">
     <fragment
         android:id="@+id/navigation_air_tickets"
@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_navigation_air_tickets_to_searchDialogFragment"
             app:destination="@id/searchDialogFragment" />
+        <action
+            android:id="@+id/action_navigation_air_tickets_to_countrySelectedFragment2"
+            app:destination="@id/countrySelectedFragment2" />
     </fragment>
     <dialog
         android:id="@+id/searchDialogFragment"
@@ -20,9 +23,6 @@
         <action
             android:id="@+id/action_searchDialogFragment_to_searchFragment1"
             app:destination="@id/searchFragment1" />
-        <action
-            android:id="@+id/action_searchDialogFragment_to_searchFragment2"
-            app:destination="@id/searchFragment2" />
         <action
             android:id="@+id/action_searchDialogFragment_to_searchFragment3"
             app:destination="@id/searchFragment3" />
@@ -41,13 +41,12 @@
         tools:layout="@layout/fragment_search3"
         android:label="fragment_search3" />
     <fragment
-        android:id="@+id/searchFragment2"
-        android:name="com.example.testtaskavia.presentation.ui.SearchFragment2"
-        tools:layout="@layout/fragment_search2"
-        android:label="fragment_search2" />
-    <fragment
         android:id="@+id/searchFragment1"
         android:name="com.example.testtaskavia.presentation.ui.SearchFragment1"
         tools:layout="@layout/fragment_search1"
         android:label="fragment_search1" />
+    <fragment
+        android:id="@+id/countrySelectedFragment2"
+        android:name="com.example.testtaskavia.presentation.ui.CountrySelectedFragment"
+        android:label="CountrySelectedFragment" />
 </navigation>

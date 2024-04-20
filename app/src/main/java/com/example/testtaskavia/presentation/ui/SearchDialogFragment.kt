@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
 import android.widget.TextView.OnEditorActionListener
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.testtaskavia.R
 import com.example.testtaskavia.databinding.FragmentSearchDialogBinding
 import com.example.testtaskavia.presentation.utils.CyrillicInputFilter
+import com.example.testtaskavia.presentation.utils.FROM_TEXT
+import com.example.testtaskavia.presentation.utils.WHERE_TEXT
+import com.example.testtaskavia.presentation.utils.ext.setNavigationResult
 import com.example.testtaskavia.presentation.utils.ext.toEditable
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -42,21 +46,18 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnPhuket.setOnClickListener{
-            binding.etWhere.text = resources.getString(R.string.title_phuket).toEditable()
-            navigateToSearchCountrySelected()
+            navigateToSearchCountrySelected(resources.getString(R.string.title_phuket))
         }
         binding.btnSochi.setOnClickListener{
-            binding.etWhere.text = resources.getString(R.string.title_sochi).toEditable()
-            navigateToSearchCountrySelected()
+            navigateToSearchCountrySelected(resources.getString(R.string.title_sochi))
         }
         binding.btnStambul.setOnClickListener{
-            binding.etWhere.text = resources.getString(R.string.title_stambul).toEditable()
-            navigateToSearchCountrySelected()
+            navigateToSearchCountrySelected(resources.getString(R.string.title_stambul))
         }
 
         binding.etWhere.setOnEditorActionListener{ v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                navigateToSearchCountrySelected()
+                navigateToSearchCountrySelected(binding.etWhere.text.toString())
                 true
             } else false
         }
@@ -65,7 +66,7 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
             findNavController().navigate(R.id.action_searchDialogFragment_to_searchFragment1)
         }
         binding.btnSearch2.setOnClickListener{
-            findNavController().navigate(R.id.action_searchDialogFragment_to_searchFragment2)
+            navigateToSearchCountrySelected(resources.getString(R.string.title_search2))
         }
         binding.btnSearch3.setOnClickListener{
             findNavController().navigate(R.id.action_searchDialogFragment_to_searchFragment3)
@@ -85,7 +86,7 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
             state = BottomSheetBehavior.STATE_EXPANDED
         }
 
-        arguments?.getString(AirTicketsFragment.FROM_TEXT)?.let { fromText ->
+        arguments?.getString(FROM_TEXT)?.let { fromText ->
             binding.etFrom.text = fromText
             binding.etFrom.setTextColor(resources.getColor(R.color.white))
         } ?: {
@@ -97,8 +98,9 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
         binding.etWhere.filters = arrayOf(CyrillicInputFilter())
     }
 
-    private fun navigateToSearchCountrySelected() {
-        println("dsfsd")
+    private fun navigateToSearchCountrySelected(whereText: String) {
+        setNavigationResult(whereText, REQUEST_KEY)
+        findNavController().popBackStack()
     }
 
 
@@ -106,4 +108,9 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        val REQUEST_KEY = "SEARCH_DIALOG_FRAGMENT_REQUEST_KEY"
+    }
+
 }

@@ -3,15 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".presentation.ui.SearchFragment2">
+    tools:context=".presentation.ui.TiketsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        style="@style/TextAppearance.AppCompat.BaseText.ButtonText1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/title_search2" />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>

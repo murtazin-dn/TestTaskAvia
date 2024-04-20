@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +18,11 @@ import com.example.testtaskavia.app.App
 import com.example.testtaskavia.databinding.FragmentAirTicketsBinding
 import com.example.testtaskavia.presentation.adapter.OffersAdapter
 import com.example.testtaskavia.presentation.utils.CyrillicInputFilter
+import com.example.testtaskavia.presentation.utils.FROM_TEXT
+import com.example.testtaskavia.presentation.utils.WHERE_TEXT
+import com.example.testtaskavia.presentation.utils.ext.getNavigationResult
+import com.example.testtaskavia.presentation.utils.ext.registerResultObserver
+import com.example.testtaskavia.presentation.utils.ext.toEditable
 import com.example.testtaskavia.presentation.viewmodels.AirTicketsViewModel
 import com.example.testtaskavia.presentation.viewmodels.AirTicketsViewModelFactory
 import javax.inject.Inject
@@ -30,6 +37,8 @@ class AirTicketsFragment : Fragment() {
     private lateinit var viewModel: AirTicketsViewModel
     private lateinit var offersAdapter: OffersAdapter
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +48,18 @@ class AirTicketsFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(AirTicketsViewModel::class.java)
         viewModel.getOffers()
+        registerResultObserver<String>(SearchDialogFragment.REQUEST_KEY){ whereText ->
+            binding.etWhere.text = whereText.toEditable()
+            val fromText = binding.etFrom.text.toString()
+            val bundle = bundleOf(
+                FROM_TEXT to fromText,
+                WHERE_TEXT to whereText
+            )
+            findNavController().navigate(
+                R.id.action_navigation_air_tickets_to_countrySelectedFragment2,
+                bundle
+            )
+        }
         _binding = FragmentAirTicketsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -70,9 +91,11 @@ class AirTicketsFragment : Fragment() {
             val bundle =
                 if (!fromText.isEmpty()) bundleOf(FROM_TEXT to fromText)
             else null
-            if (hasFocus) findNavController()
-                .navigate(R.id.action_navigation_air_tickets_to_searchDialogFragment, bundle)
-            binding.etWhere.clearFocus()
+            if (hasFocus) {
+                binding.etWhere.clearFocus()
+                findNavController()
+                    .navigate(R.id.action_navigation_air_tickets_to_searchDialogFragment, bundle)
+            }
         }
     }
 
@@ -87,7 +110,4 @@ class AirTicketsFragment : Fragment() {
         _binding = null
     }
 
-    companion object{
-        const val FROM_TEXT = "from_text"
-    }
 }
