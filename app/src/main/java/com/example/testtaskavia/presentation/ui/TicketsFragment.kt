@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.model.ticket.Ticket
 import com.example.testtaskavia.R
 import com.example.testtaskavia.app.App
 import com.example.testtaskavia.databinding.FragmentTicketsBinding
 import com.example.testtaskavia.presentation.adapter.TicketsAdapter
+import com.example.testtaskavia.presentation.adapter.ticketAdapterDelegate
+import com.example.testtaskavia.presentation.adapter.ticketAdapterNoBadgeDelegate
 import com.example.testtaskavia.presentation.utils.DATE
 import com.example.testtaskavia.presentation.utils.FROM_TEXT
 import com.example.testtaskavia.presentation.utils.PASSENGERS_COUNT
@@ -19,6 +23,7 @@ import com.example.testtaskavia.presentation.utils.formatDate2
 import com.example.testtaskavia.presentation.viewmodels.AirTicketsViewModel
 import com.example.testtaskavia.presentation.viewmodels.TicketsViewModel
 import com.example.testtaskavia.presentation.viewmodels.TicketsViewModelFactory
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import javax.inject.Inject
 
 class TicketsFragment : Fragment() {
@@ -30,7 +35,7 @@ class TicketsFragment : Fragment() {
     lateinit var viewModelFactory: TicketsViewModelFactory
     private lateinit var viewModel: TicketsViewModel
 
-    private lateinit var adapter: TicketsAdapter
+    private lateinit var adapter: ListDelegationAdapter<List<Ticket>>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,11 +51,15 @@ class TicketsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = TicketsAdapter()
+        adapter = ListDelegationAdapter(
+            ticketAdapterDelegate(),
+            ticketAdapterNoBadgeDelegate()
+        )
         binding.rcTickets.adapter = adapter
         binding.rcTickets.layoutManager = LinearLayoutManager(requireContext())
         viewModel.tickets.observe(viewLifecycleOwner){ tickets ->
-            adapter.data = tickets
+            adapter.items = tickets
+            adapter.notifyDataSetChanged()
         }
 
         val fromText = arguments?.getString(FROM_TEXT, null)
@@ -65,6 +74,7 @@ class TicketsFragment : Fragment() {
 
         binding.toolbar.title = title
         binding.toolbar.subtitle = subTitle
+        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
     }
 
 

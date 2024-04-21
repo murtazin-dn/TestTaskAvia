@@ -41,12 +41,19 @@ android {
 
 dependencies {
 
+    val dagger_version = "2.51.1"
+    val adapter_delegates_version = "4.3.2"
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.0")
-    val dagger_version = "2.51.1"
 
     implementation(project(":domain"))
     implementation(project(":data"))
+
+    //AdapterDelegates
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:$adapter_delegates_version")
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapter_delegates_version")
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$adapter_delegates_version")
+
 
     //Dagger
     implementation("com.google.dagger:dagger:$dagger_version")

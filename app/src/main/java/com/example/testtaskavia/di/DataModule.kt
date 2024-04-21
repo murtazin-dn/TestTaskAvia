@@ -1,5 +1,6 @@
 package com.example.testtaskavia.di
 
+import android.content.Context
 import com.example.data.network.mapper.ArrivalMapper
 import com.example.data.network.mapper.DepartureMapper
 import com.example.data.network.mapper.OfferMapper
@@ -10,6 +11,7 @@ import com.example.data.network.model.offerstickets.TicketsOfferDto
 import com.example.data.network.model.tickets.ArrivalDto
 import com.example.data.network.model.tickets.DepartureDto
 import com.example.data.network.model.tickets.TicketDto
+import com.example.data.network.repository.CacheSharePrefsRepository
 import com.example.data.network.repository.OffersRepositoryImpl
 import com.example.data.network.repository.OfferService
 import com.example.domain.mapper.Mapper
@@ -18,6 +20,7 @@ import com.example.domain.model.TicketsOffer
 import com.example.domain.model.ticket.Arrival
 import com.example.domain.model.ticket.Departure
 import com.example.domain.model.ticket.Ticket
+import com.example.domain.repository.CacheRepository
 import com.example.domain.repository.OffersRepository
 import dagger.Module
 import dagger.Provides
@@ -54,4 +57,8 @@ class DataModule {
     fun provideArrivalMapper(): Mapper<ArrivalDto, Arrival> = ArrivalMapper()
     @Provides
     fun provideDepartureMapper(): Mapper<DepartureDto, Departure> = DepartureMapper()
+    @Provides
+    fun provideCacheRepository(context: Context): CacheRepository{
+        return CacheSharePrefsRepository(context)
+    }
 }

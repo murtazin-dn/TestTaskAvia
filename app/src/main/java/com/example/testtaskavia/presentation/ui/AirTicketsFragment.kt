@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -38,7 +39,6 @@ class AirTicketsFragment : Fragment() {
     private lateinit var offersAdapter: OffersAdapter
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,9 +46,10 @@ class AirTicketsFragment : Fragment() {
     ): View {
         (activity?.applicationContext as App).appComponent.inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory)
-                .get(AirTicketsViewModel::class.java)
+            .get(AirTicketsViewModel::class.java)
         viewModel.getOffers()
-        registerResultObserver<String>(SearchDialogFragment.REQUEST_KEY){ whereText ->
+        viewModel.getFromText()
+        registerResultObserver<String>(SearchDialogFragment.REQUEST_KEY) { whereText ->
             binding.etWhere.text = whereText.toEditable()
             val fromText = binding.etFrom.text.toString()
             val bundle = bundleOf(
@@ -78,20 +79,27 @@ class AirTicketsFragment : Fragment() {
         binding.rcOffers.adapter = offersAdapter
 
         binding.etFrom.filters = arrayOf(CyrillicInputFilter())
-        binding.etFrom.addTextChangedListener(object : TextWatcher{
+        binding.etFrom.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
-                println(p0.toString())
+                viewModel.saveFromText(p0.toString())
             }
-
         })
         binding.etWhere.setOnFocusChangeListener { _, hasFocus ->
-            val fromText = binding.etFrom.text.toString()
-            val bundle =
-                if (!fromText.isEmpty()) bundleOf(FROM_TEXT to fromText)
-            else null
             if (hasFocus) {
+                val fromText = binding.etFrom.text.toString()
+                val bundle =
+                    if (fromText.isNotEmpty()) bundleOf(FROM_TEXT to fromText)
+                    else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Поле \"Откуда\" не может быть пустым",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        binding.etWhere.clearFocus()
+                        return@setOnFocusChangeListener
+                    }
                 binding.etWhere.clearFocus()
                 findNavController()
                     .navigate(R.id.action_navigation_air_tickets_to_searchDialogFragment, bundle)
@@ -100,8 +108,12 @@ class AirTicketsFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel.offers.observe(viewLifecycleOwner){ offers ->
+        viewModel.offers.observe(viewLifecycleOwner) { offers ->
+            println(offers)
             offersAdapter.data = offers
+        }
+        viewModel.fromText.observe(viewLifecycleOwner) { fromText ->
+            binding.etFrom.text = fromText.toEditable()
         }
     }
 
