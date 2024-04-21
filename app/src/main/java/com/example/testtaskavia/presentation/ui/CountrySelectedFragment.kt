@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +14,11 @@ import com.example.testtaskavia.R
 import com.example.testtaskavia.app.App
 import com.example.testtaskavia.databinding.FragmentCountrySelectedBinding
 import com.example.testtaskavia.presentation.adapter.TicketsOffersAdapter
+import com.example.testtaskavia.presentation.utils.DATE
 import com.example.testtaskavia.presentation.utils.FROM_TEXT
+import com.example.testtaskavia.presentation.utils.PASSENGERS_COUNT
 import com.example.testtaskavia.presentation.utils.WHERE_TEXT
+import com.example.testtaskavia.presentation.utils.calendarToDateIso
 import com.example.testtaskavia.presentation.utils.ext.toEditable
 import com.example.testtaskavia.presentation.utils.formatDate
 import com.example.testtaskavia.presentation.utils.getCurrentDateFormatted
@@ -34,6 +38,10 @@ class CountrySelectedFragment : Fragment() {
     private lateinit var viewModel: CountrySelectedViewModel
 
     private lateinit var ticketsOffersAdapter: TicketsOffersAdapter
+
+    private var calendar1: Calendar = Calendar.getInstance()
+    private var calendar2: Calendar = Calendar.getInstance()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,19 +67,35 @@ class CountrySelectedFragment : Fragment() {
             ticketsOffersAdapter.data = ticketsOffers
         }
         binding.chipBack.setOnClickListener{it as Chip
-            showDatePickerDialog { date ->
-                it.text = date
+            showDatePickerDialog(calendar1) { calendar ->
+                calendar1 = calendar
+                it.text = formatDate(calendar)
             }
         }
         binding.chipDate.setOnClickListener{it as Chip
-            showDatePickerDialog { date ->
-                it.text = date
+            showDatePickerDialog(calendar2) { calendar ->
+                calendar2 = calendar
+                it.text = formatDate(calendar)
                 it.isChipIconVisible = false
             }
         }
         binding.btnChange.setOnClickListener{reversePlaceText()}
         binding.btnClear.setOnClickListener{binding.etWhere.text = "".toEditable()}
         binding.btnBack.setOnClickListener{findNavController().popBackStack()}
+        binding.btnShowTickets.setOnClickListener{
+            val fromText = binding.etFrom.text.toString()
+            val whereText = binding.etWhere.text.toString()
+            val bundle = bundleOf(
+                FROM_TEXT to fromText,
+                WHERE_TEXT to whereText,
+                DATE to calendarToDateIso(calendar2),
+                PASSENGERS_COUNT to 1
+            )
+            findNavController().navigate(
+                R.id.action_countrySelectedFragment2_to_ticketsFragment,
+                bundle
+            )
+        }
     }
 
     private fun initViews() {
@@ -87,7 +111,7 @@ class CountrySelectedFragment : Fragment() {
         binding.etFrom.text = fromText.toEditable()
         binding.etWhere.text = whereText.toEditable()
 
-        binding.chipDate.text = getCurrentDateFormatted()
+        binding.chipDate.text = formatDate(calendar2)
     }
 
     private fun reversePlaceText(){
@@ -97,15 +121,16 @@ class CountrySelectedFragment : Fragment() {
         binding.etWhere.text = fromText
     }
 
-    private fun showDatePickerDialog(action: (String) -> Unit) {
-        val calendar = Calendar.getInstance()
+    private fun showDatePickerDialog(calendar: Calendar, action: (Calendar) -> Unit) {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(requireContext(), { _, year, month, day ->
-            val selectedDate = formatDate(year, month, day)
-            action.invoke(selectedDate)
+            val result = Calendar.getInstance().apply{
+                set(year, month, day)
+            }
+            action.invoke(result)
         }, year, month, day)
 
         datePickerDialog.show()

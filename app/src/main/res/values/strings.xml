@@ -9,7 +9,7 @@
     <string name="hint_from">Откуда - Москва</string>
     <string name="moskva">Москва</string>
     <string name="hint_where">Куда - Турция</string>
-    <string name="turcia">Куда - Турция</string>
+    <string name="turcia">Турция</string>
     <string name="air_tickets_senter_title">Музыкально отлететь</string>
     <string name="price_pattern">от %1$s ₽</string>
     <string name="price_pattern2">%1$s₽</string>
@@ -24,7 +24,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_back">обратно</string>
     <string name="title_filter">фильтр</string>
+    <string name="title_filter2">Фильтр</string>
+    <string name="title_graph">График цен</string>
     <string name="title_straight_rails">Прямые рельсы</string>
     <string name="title_show_all">Показать все</string>
     <string name="title_show_all_tickets">Посмотреть все билеты</string>
+    <string name="title_transfer">Без пересадок</string>
+    <string name="slash">/</string>
+    <string name="dash">—</string>
+    <string name="title_travel_time">%1$sч в пути</string>
 </resources>

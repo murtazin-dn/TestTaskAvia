@@ -187,14 +187,15 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/btn_show_tickets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/button_background"
+        android:fontFamily="@font/sf_pro_display_regular"
         android:text="@string/title_show_all_tickets"
         android:textAllCaps="false"
-        android:fontFamily="@font/sf_pro_display_regular"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
 
 
