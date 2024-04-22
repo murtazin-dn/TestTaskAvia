@@ -3,9 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black"
     tools:context=".presentation.ui.SearchFragment1">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey2"
+        app:navigationIcon="@drawable/ic_left_arrow_blue"
+        app:title="@string/title_search1"
+        app:titleTextColor="@color/white"/>
     <!-- TODO: Update blank fragment layout -->
     <TextView
         style="@style/TextAppearance.AppCompat.BaseText.ButtonText1"
